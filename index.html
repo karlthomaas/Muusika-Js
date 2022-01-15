@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // returns random elem from array
+        function randomChoice(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
+        };
+        
+        function removeElem(arr, elem) {
+            for (var i = 0; i < arr.length; i ++){
+                if (arr[i] === elem){
+                    arr.splice(i, 1);
+                    i--;
+                }
+            }
+        };
+        var data = {1: {'periood': 'Hilisromantism', 'video_link': 'https://www.youtube.com/embed/dfe8tCcHnKY', 'video_nimi': 'Also Sprach Zarathustra', 'autor': 'Richard Strauss'}, 2: {'periood': 'Hilisromantism', 'video_link': 'https://www.youtube.com/embed/XRU1AJsXN1g', 'video_nimi': 'Valküüride lend', 'autor': 'Richard Wagner'}, 3: {'periood': 'Hilisromantism', 'video_link': 'https://www.youtube.com/embed/Les39aIKbzE', 'video_nimi': 'Mahler 5.s adagietto', 'autor': 'Gustav Mahler'}, 4: {'periood': 'Impressionism', 'video_link': 'https://youtu.be/CvFH_6DNRCY?t=7', 'video_nimi': 'Clair de lune', 'autor': 'Claude Debussy'}, 5: {'periood': 'Impressionism', 'video_link': 'https://www.youtube.com/embed/p5Rhv1E3tEM', 'video_nimi': "Golliwog's Cakewalk", 'autor': 'Debussy'}, 6: {'periood': 'Impressionism', 'video_link': '-', 'video_nimi': '-', 'autor': '-'}, 7: {'periood': 'Ekspressionism', 'video_link': 'https://www.youtube.com/embed/8hnFpLeeCT0', 'video_nimi': 'Valss Op. 23 Nr. 5', 'autor': 'Arnold Schönberg'}, 8: {'periood': 'Ekspressionism', 'video_link': 'https://www.youtube.com/embed/rGWai0SEpUQ', 'video_nimi': 'Ellujäänu Varssavis', 'autor': 'Arnold Schönberg'}, 9: {'periood': 'Ekspressionism', 'video_link': 'https://www.youtube.com/embed/xTMVs3G9kkg', 'video_nimi': 'Collage Bach 2. osa', 'autor': 'Arvo Pärt'}, 10: {'periood': 'Neoklassitsism', 'video_link': 'https://www.youtube.com/embed/GXFSK0ogeg4', 'video_nimi': 'O Fortuna', 'autor': 'Carl Orff'}, 11: {'periood': 'Neoklassitsism', 'video_link': 'https://www.youtube.com/embed/Z_hOR50u7ek', 'video_nimi': 'Romeo ja Juliet', 'autor': 'Sergei Prokofjev'}, 12: {'periood': 'Neoklassitsism', 'video_link': 'https://www.youtube.com/embed/phBThlPTBEg', 'video_nimi': 'Stalin', 'autor': 'Dmitri Šostakovitš'}, 13: {'periood': 'Avangardism', 'video_link': 'https://www.youtube.com/embed/h_ik4VMcLkA', 'video_nimi': 'Water music', 'autor': 'John Cage'}, 14: {'periood': 'Avangardism', 'video_link': 'https://www.youtube.com/embed/LcCs6Muljmk', 'video_nimi': 'Noorukite laul', 'autor': 'Karlheinz Stockhausen'}, 15: {'periood': 'Minimalism', 'video_link': 'https://www.youtube.com/embed/xn38GnSAlj8', 'video_nimi': 'Drumming II', 'autor': 'Steve Reich'}, 16: {'periood': 'Minimalism', 'video_link': 'https://www.youtube.com/embed/dMcz4jhDWMI', 'video_nimi': 'City Life', 'autor': 'Philipp Glass'}, 17: {'periood': 'Minimalism', 'video_link': 'https://www.youtube.com/embed/6Stu7h7Qup8', 'video_nimi': 'Glassworks', 'autor': 'Philipp Glass'}, 18: {'periood': 'Tin Tin', 'video_link': 'https://www.youtube.com/embed/TzIZPZN5K60', 'video_nimi': 'Für Alina', 'autor': 'Arvo Pärt'}, 19: {'periood': 'Tin Tin', 'video_link': 'https://www.youtube.com/embed/TJ6Mzvh3XCc', 'video_nimi': 'Peegel peeglis', 'autor': 'Arvo Pärt'}}
+        var unusedSongs = Object.keys(data);
+        var usedSongs = []
+        var song_information = [];
+
+        function newSong() {
+            if (unusedSongs.length > 0) {
+            document.getElementById("answer").innerHTML = ''  // clears answers header
+            var key = randomChoice(unusedSongs);  // takes random song key from list
+            removeElem(unusedSongs, key)  // removes key from unusedSongs
+            usedSongs.push(key) // pushes the key to usedsongs list
+            // Fills array with information ->
+            song_information = [];
+            song_information.push(data[key]["periood"]);  // 0 
+            song_information.push(data[key]["video_link"]); // 1
+            song_information.push(data[key]["video_nimi"]);  // 2
+            song_information.push(data[key]["autor"]); // 3
+            
+            document.getElementById("yt_video").src=song_information[1]
+        } else {
+            alert("Kõik lood on mängitud, värskendage lehte. ")
+        }};
+
+        function showAnswer(){
+            document.getElementById("answer").innerHTML = `Periood: ${song_information[0]}<br>Autor: ${song_information[3]}<br>Laulu nimi: ${song_information[2]}`
+        }
+
+
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="banner"><h1>Muusika kordamine</h1></div>
+        <div class="video"><iframe id="yt_video" width="800" height="400" src=""></iframe></div>
+        <div class="buttons">
+            <button type="button" id="next_button" onclick="newSong()">Uus video</button>
+            <button type="button" id="answer_button" onclick="showAnswer()">Näita vastus</button>
+        </div>
+        <div class="answer_box"><h1 id="answer"></h1></div>
+    </div>
+</body>
+</html>
+
+<style>
+.container{
+    width:800px;
+    margin:0 auto;
+}
+
+.buttons{
+    padding-left: 325px;
+}
+.answer_box{
+    padding-left:242px;
+}
+.banner{
+    padding-left:242px;
+}
+</style>
